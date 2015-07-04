@@ -1,0 +1,9 @@
+>> a = input('Enter integer: ')
+Enter integer: 5
+a =  5
+>> var = input('Enter string: ')
+Enter string: hello
+error: 'hello' undefined near line 1 column 1
+>> var = input('Enter string: ', 's')
+Enter string: hello
+var = hello
