@@ -2,7 +2,7 @@ import java.util.*;
 import java.sql.*;
 import jdbc.*;
 
-public class P1
+public class P1S
 {
 	static Statement stmt = null;
 	static Scanner sc = new Scanner(System.in);
@@ -49,7 +49,7 @@ public class P1
 		int id, age;
 		long contactNo;
 		
-		System.out.print("\nInsert Record:-");
+		System.out.println("\nInsert Record:-");
 		
 		System.out.print("ID: ");
 		id = sc.nextInt();
@@ -84,25 +84,68 @@ public class P1
 	
 	static void select()
 	{
-		RsultSet rs = null;
+		ResultSet rs = null;
 		
-		String fname, lname, address, sql;
-		int id, age;
-		long contactNo;
-		
-		System.out.print("\nRecords:-");
+		System.out.println("\nRecords:-");
 		
 		sql = "select * from registration";
 		try
 		{
 			rs = stmt.executeQuery(sql);
-			System.out.println("id\t|\tfname\t|\tlname\t|\taddress\t|\tcontact_no\t|\tage");
-			
-			System.out.println("--> Record Inserted <--");
+			while(rs.next())
+			{
+				System.out.println("ID: " + rs.getInt("id") + "\nFirst Name: " + rs.getString("fname") + "\nLast Name: " + rs.getString("lname") + "\nAddress: " + rs.getString("address") + "\nContact No: " + rs.getLong("contact_no") + "\nAge: " + rs.getInt("age") + "\n");
+			}
 		}
 		catch(SQLException sqle)
 		{
 			System.out.println(sqle.getMessage());
 		} 
+	}
+	
+	static void delete()
+	{
+		int id;
+		String sql;
+		
+		select();
+		
+		System.out.print("Enter ID to Delete Record: ");
+		id = sc.nextInt();
+		
+		sql = "delete from registration where id=" + id;
+		try
+		{
+			stmt.executeUpdate(sql);
+			System.out.println("--> Record Deleted <--");
+		}
+		catch(SQLException sqle)
+		{
+			System.out.println(sqle.getMessage());
+		}
+	}
+	
+	static void update()
+	{
+		int id, age;
+		String sql;
+		
+		select();
+		
+		System.out.print("Enter ID to Update Record: ");
+		id = sc.nextInt();
+		System.out.print("Enter new Age: ");
+		age = sc.nextInt();
+		
+		sql = "update registration set age=" + age + " where id=" + id;
+		try
+		{
+			stmt.executeUpdate(sql);
+			System.out.println("--> Record Updated <--");
+		}
+		catch(SQLException sqle)
+		{
+			System.out.println(sqle.getMessage());
+		}
 	}
 }
