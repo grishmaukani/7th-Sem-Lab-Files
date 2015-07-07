@@ -7,6 +7,7 @@ public class MySQL
 	static Connection con = null;
 	static Statement stmt = null;
 	static PreparedStatement pstmt = null;
+	static CallableStatement cstmt = null;
 	
 	public static void establishConnection(String dbName, String un, String pass) throws SQLException, ClassNotFoundException
 	{
@@ -89,5 +90,31 @@ public class MySQL
 	public static PreparedStatement getPreparedStatement()
 	{
 		return pstmt;
+	}
+	
+	public static boolean connectCallableStatement(String dbName, String un, String pass, String sql)
+	{
+		try
+		{
+			establishConnection(dbName, un, pass);
+			cstmt = con.prepareCall(sql);
+			//System.out.println("wrapper created");
+		}
+		catch(ClassNotFoundException cnfe)
+		{
+			System.out.println("driver not loaded : " + cnfe.getMessage());
+			return false;
+		}
+		catch(SQLException sqle)
+		{
+			System.out.println("couldn't connect : " + sqle.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
+	public static CallableStatement getCallableStatement()
+	{
+		return cstmt;
 	}
 }
