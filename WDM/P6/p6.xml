@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE programming_language [
+	<!ELEMENT programming_language (language*) >
+	<!ELEMENT language (name, library*) >
+	<!ELEMENT name (#PCDATA) >
+	<!ELEMENT library (name, function*) >
+	<!ELEMENT name (#PCDATA) >
+	<!ELEMENT function (modifier?, name, description, return_type, argument_list) >
+	<!ELEMENT argument_list (argument*) >
+	<!ELEMENT modifier (#PCDATA) >
+	<!ELEMENT name (#PCDATA) >
+	<!ELEMENT description (#PCDATA) >
+	<!ELEMENT return_type  (#PCDATA) >
+	<!ELEMENT argument (#PCDATA) >
+]>
+
+<?xml-stylesheet type="text/xsl" href="p6.xsl"?>
+
+<programming_language>
+	<language>
+		<name>C++</name>
+		<library format='.h'>
+			<name>string</name>
+			<function>
+				<name>strcat</name>
+				<description>Append two strings passed as arguments. Concatenated string stored in 1st string. Returns pointer to cancatenated string.</description>
+				<return_type>char*</return_type>
+				<argument_list>
+					<argument>char*</argument>
+					<argument>char*</argument>
+				</argument_list>
+			</function>
+			
+			<function>
+				<name>strchr</name>
+				<description>Scans string in forward direction for the 1st occurrence of a character in a string. On success, returns the pointer to the 1st occurrence of the character. On failure, reutns null.</description>
+				<return_type>char*</return_type>
+				<argument_list>
+					<argument>char*</argument>
+					<argument>int</argument>
+				</argument_list>
+			</function>
+			
+			<function>
+				<name>strcmp</name>
+				<description>Compares two strings. Return value- &lt; 0 if 1st &lt; 2nd, == 0 if 1st == 2nd, &gt; 0 if 1st &gt; 2nd</description>
+				<return_type>int</return_type>
+				<argument_list>
+					<argument>char*</argument>
+					<argument>char*</argument>
+				</argument_list>
+			</function>
+		</library>
+	</language>
+</programming_language>

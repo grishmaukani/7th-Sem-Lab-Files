@@ -1,0 +1,8 @@
+<!ELEMENT students(student*)>
+<!ELEMENT student(name, city, admissionyear, CPI)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT city (#PCDATA)>
+<!ELEMENT admissionyear (#PCDATA)>
+<!ELEMENT CPI (#PCDATA)>
+
+<!ATTLIST student branch (COMPUTER|MECHANICAL|CHEMICAL|INFORMATIONTECHNOLOGY|CIVIL) #REQUIRED>

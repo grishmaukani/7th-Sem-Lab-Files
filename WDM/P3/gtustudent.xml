@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE student SYSTEM "gtustudent.dtd">
+
+<students>
+	<student branch="COMPUTER">
+		<name>Abdul Quadir</name>
+		<city>Ahmedabad</city>
+		<admissionyear>2009</admissionyear >
+		<CPI>7.5</CPI>
+	</student>
+	
+	<student branch="MECHANICAL">
+		<name>Joseph Desusa</name>
+		<city>Baroda</city>
+		<admissionyear>2009</admissionyear >
+		<CPI>8.5</CPI>
+	</student>
+	
+	<student branch="CHEMICAL">
+		<name>Sanjay Patel </name>
+		<city>Surat</city>
+		<admissionyear>2008</admissionyear >
+		<CPI>6.5</CPI>
+	</student>
+	
+	<student branch="COMPUTER">
+		<name>Riya Sharma</name>
+		<city>Baroda</city>
+		<admissionyear>2009</admissionyear >
+		<CPI>7.0</CPI>
+	</student>
+	
+	<student branch="INFORMATIONTECHNOLOGY">
+		<name>Sudha Patel</name>
+		<city>Ahmedabad</city>
+		<admissionyear>2009</admissionyear >
+		<CPI>7.3</CPI>
+	</student>
+	
+	<student branch="CIVIL">
+		<name>Akhilesh yadav</name>
+		<city>Mehsana</city>
+		<admissionyear>2008</admissionyear >
+		<CPI>6.0</CPI>
+	</student>
+</students>
