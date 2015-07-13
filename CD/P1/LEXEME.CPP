@@ -1,13 +1,15 @@
-#include<fstream.h>
+#include<iostream.h>
 #include<conio.h>
 #include<stdio.h>
-#include<string.h>
 #include<ctype.h>
+#include"lexical.cpp"
 
 void main()
 {
 	char *a;
 	int state=0, i=0;
+	Lexical l;
+
 
 	clrscr();
 
@@ -26,21 +28,28 @@ void main()
 					state=3;
 				break;
 
-			case 1: while(isalpha(a[i]))
+			case 1: char *t;
+				int tc=0;
+				while(isalpha(a[i]))
 				{
-					cout<<a[i];
-					i++;
+					t[tc++]=a[i];
+					cout<<a[i++];
 				}
+				t[tc]='\0';
+				l.tokenCheck(t);
+				memset(t, 0, strlen(t));
 				cout<<"\n";
 				getch();
 				state=0;
 				break;
 
-			case 2: while(isdigit(a[i]))
+			case 2: int c=0;
+				while(isdigit(a[i]))
 				{
-					cout<<a[i];
-					i++;
+					c = c*10 + a[i]-'0';
+					cout<<a[i++];
 				}
+				l.consStore(c);
 				cout<<"\n";
 				getch();
 				state=0;
@@ -52,17 +61,20 @@ void main()
 					state=0;
 					break;
 				}
-				while(!isalpha(a[i]) || !isdigit(a[i]))
+				char *s;
+				int sc=0;
+				while(!isalnum(a[i]) && a[i]!='\0')
 				{
-					cout<<a[i];
-					i++;
+					s[sc++]=a[i];
+					cout<<a[i++];
 				}
+				s[sc]='\0';
+				l.spsymStore(s);
 				cout<<"\n";
 				getch();
 				state=0;
 				break;
 		}
 	}
-
 	getch();
 }

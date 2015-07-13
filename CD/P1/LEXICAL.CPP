@@ -1,104 +1,75 @@
 #include<fstream.h>
-#include<iostream.h>
-#include<conio.h>
 #include<string.h>
-#include<stdio.h>
 
-fstream f;
-
-int keyword(char *c)
+class Lexical
 {
-	f.open("keyword.txt", ios::in);
-	char *k;
+	fstream kwd, idf, cons, spsym;
 
-	while(!f.eof())
-	{
-		if(!f.eof())
-		{
-			f.getline(k, '\n');
-			if(strcmpi(k,c) == 0)
-			{
-				f.close();
-				return 1;
-			}
-		}
-	}
+	public:
+		Lexical();
+		~Lexical();
+		void tokenCheck(char*);
+		void consStore(int);
+		void spsymStore(char*);
+};
 
-	f.close();
-	return 0;
+Lexical :: Lexical()
+{
+	kwd.open("kwdstore.txt", ios::app);
+	idf.open("idfstore.txt",  ios::app);
+	cons.open("consstore.txt", ios::app);
+	spsym.open("spsymstore.txt", ios::app);
 }
 
-void main()
+Lexical :: ~Lexical()
 {
-	clrscr();
+	kwd.close();
+	idf.close();
+	cons.close();
+	spsym.close();
+}
 
-	char *prog[20], *data[20][20];
-	int ic=0, sc[10], l, i, j, k, c;
+void Lexical :: tokenCheck(char *t)
+{
+	fstream f;
 
-	/*
-	f.open("input.txt", ios::in);
-	char *c;
+	f.open("keywords.txt", ios::in);
+	char *k;
+	int check=0;
 
 	while(!f.eof())
 	{
-		if(!f.eof())
-		{
-			f.getline(c, ' ');
-			cout<<c<<"\n";
-		}
-	}
-
-	f.close();
-	*/
-
-	cout<<"ENTER PROGRAM:-[type 'end' to terminate code]\n";
-	while(1)
-	{
-		gets(prog[ic]);
-		if(strcmp(prog[ic],"end")==0)
+		if(f.eof())
 			break;
-		if(prog[ic][0]==' ' || prog[ic][0]=='\t')
-		{
-			j=0;
-			while(prog[ic][j]==' ' || prog[ic][j]=='\t')
-				j++;
 
-			l = strlen(prog[ic]);
-			for(i=j;i<=l;i++)
-				prog[ic][i-j] = prog[ic][i];
+		f.getline(k, '\n');
+		if(strcmpi(k,t) == 0)
+		{
+			check=1;
+			break;
 		}
-		ic++;
 	}
 
-	for(i=0;i<ic;i++)
+	if(check==1)
 	{
-		l=strlen(prog[ic]);
-		c=0;
-		k=0;
-		for(j=0;j<l;j++)
-		{
-			if(prog[ic][j]!=' ')
-				data[ic][c][k++]=prog[ic][j];
-			else
-			{
-				data[ic][c][k] = '\0';
-				c++;
-				k=0;
-			}
-		}
-		sc[ic] = c+1;
+		kwd.write(t, sizeof(t));
+		kwd<<"\n";
 	}
-
-	for(i=0;i<ic;i++)
+	else
 	{
-		cout<<"Line "<<i+1<<":\n";
-
-		for(j=0;j<sc[ic];j++)
-		{
-			cout<<"Segment "<<j+1<<": ";
-			puts(data[ic][j]);
-		}
+		idf.write(t, sizeof(t));
+		idf<<"\n";
 	}
+	f.close();
+}
 
-	getch();
+void Lexical :: consStore(int c)
+{
+	cons<<c<<"\n";
+}
+
+void Lexical :: spsymStore(char *s)
+{
+	spsym.write(s, sizeof(s));
+	spsym<<"\n";
 }
